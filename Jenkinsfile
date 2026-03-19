@@ -66,12 +66,12 @@ pipeline {
                         sh """
                         ssh -o StrictHostKeyChecking=no ubuntu@44.200.17.163 "
                         
-                        docker pull ${DOCKER_USER}/devapp-devapp-prod:latest
+                        sudo docker pull ${DOCKER_USER}/devapp-devapp-prod:latest
                         
-                        docker stop react-container || true
-                        docker rm react-container || true
+                        sudo docker stop react-container || true
+                        sudo docker rm react-container || true
                         
-                        docker run -d -p 80:80 --name react-container ${DOCKER_USER}/devapp-devapp-prod:latest
+                        sudo docker run -d -p 80:80 --name react-container ${DOCKER_USER}/devapp-devapp-prod:latest
                         "
                         """
                     }
