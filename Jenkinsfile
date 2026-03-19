@@ -7,13 +7,13 @@ pipeline {
 
     stages {
 
-        stage('Build Image') {
+        stage('Build') {
             steps {
                 sh 'docker build -t $IMAGE_NAME .'
             }
         }
 
-        stage('Push to development') {
+        stage('development') {
             when {
                 branch 'dev'
             }
