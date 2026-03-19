@@ -56,20 +56,27 @@ pipeline {
                 branch 'master'
             }
             steps {
-                sshagent(['ec2-ssh']) {
-                    sh '''
-                    ssh -o StrictHostKeyChecking=no ubuntu@44.200.17.163 '
-                    
-                    docker pull <username>/devapp-devapp-prod:latest
-                    
-                    docker stop react-container || true
-                    docker rm react-container || true
-                    
-                    docker run -d -p 80:80 --name react-container <username>/devapp-devapp-prod:latest
-                    '
-                    '''
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    sshagent(['ec2-ssh']) {
+                        sh """
+                        ssh -o StrictHostKeyChecking=no ubuntu@44.200.17.163 "
+                        
+                        docker pull ${DOCKER_USER}/devapp-devapp-prod:latest
+                        
+                        docker stop react-container || true
+                        docker rm react-container || true
+                        
+                        docker run -d -p 80:80 --name react-container ${DOCKER_USER}/devapp-devapp-prod:latest
+                        "
+                        """
+                    }
                 }
             }
         }
     }
 }
+# Note: Replace <username> with your actual Docker Hub username in the above script.
