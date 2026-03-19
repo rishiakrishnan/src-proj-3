@@ -68,7 +68,7 @@ pipeline {
                 )]) {
                     sshagent(['ec2-ssh']) {
                         sh """
-                        ssh -o StrictHostKeyChecking=no ubuntu@${APP_SERVER}"
+                        ssh -o StrictHostKeyChecking=no ubuntu@${APP_SERVER} '
                         
                         sudo docker pull ${DOCKER_USER}/devapp-devapp-prod:latest
                         
@@ -76,7 +76,7 @@ pipeline {
                         sudo docker rm react-container || true
                         
                         sudo docker run -d -p 80:80 --name react-container ${DOCKER_USER}/devapp-devapp-prod:latest
-                        "
+                        '
                         """
                     }
                 }
