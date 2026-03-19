@@ -11,7 +11,6 @@ pipeline {
             steps {
                 sh 'docker build -t $IMAGE_NAME .'
                 sh 'echo "BRANCH_NAME: $BRANCH_NAME"'
-                sh 'echo "ONE COMPLETED"'
             }
         }
 
