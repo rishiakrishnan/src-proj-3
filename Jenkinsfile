@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    parameters {
+        string(name: 'APP_SERVER', defaultValue: '10.0.1.60')
+    }
+
     environment {
         IMAGE_NAME = "react-app"
     }
@@ -64,7 +68,7 @@ pipeline {
                 )]) {
                     sshagent(['ec2-ssh']) {
                         sh """
-                        ssh -o StrictHostKeyChecking=no ubuntu@44.200.17.163 "
+                        ssh -o StrictHostKeyChecking=no ubuntu@${APP_SERVER}"
                         
                         sudo docker pull ${DOCKER_USER}/devapp-devapp-prod:latest
                         
