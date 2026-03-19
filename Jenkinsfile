@@ -79,4 +79,3 @@ pipeline {
         }
     }
 }
-# Note: Replace <username> with your actual Docker Hub username in the above script.
