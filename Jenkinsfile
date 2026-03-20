@@ -49,8 +49,8 @@ pipeline {
                 )]) {
                     sh '''
                     echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                    docker tag $IMAGE_NAME $DOCKER_USER/devapp-devapp-prod:latest
-                    docker push $DOCKER_USER/devapp-devapp-prod:latest
+                    docker tag $IMAGE_NAME $DOCKER_USER/buildapp-prod:latest
+                    docker push $DOCKER_USER/buildapp-prod:latest
                     '''
                 }
             }
@@ -70,12 +70,12 @@ pipeline {
                         sh """
                         ssh -o StrictHostKeyChecking=no ubuntu@${APP_SERVER} '
                         
-                        sudo docker pull ${DOCKER_USER}/devapp-devapp-prod:latest
+                        sudo docker pull ${DOCKER_USER}/buildapp-prod:latest
                         
                         sudo docker stop react-container || true
                         sudo docker rm react-container || true
                         
-                        sudo docker run -d -p 80:80 --name react-container ${DOCKER_USER}/devapp-devapp-prod:latest
+                        sudo docker run -d -p 80:80 --name react-container ${DOCKER_USER}/buildapp-prod:latest
                         '
                         """
                     }
