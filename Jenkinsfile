@@ -69,6 +69,8 @@ pipeline {
                         sh """
                         ssh -o StrictHostKeyChecking=no ubuntu@${APP_SERVER} '
                         
+                        echo ${DOCKER_PASS} | sudo docker login -u ${DOCKER_USER} --password-stdin
+                        
                         sudo docker pull ${DOCKER_USER}/buildapp-prod:latest
                         
                         sudo docker stop react-container || true
