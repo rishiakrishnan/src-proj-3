@@ -30,8 +30,8 @@ pipeline {
                 )]) {
                     sh '''
                     echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                    docker tag $IMAGE_NAME $DOCKER_USER/devapp-dev:latest
-                    docker push $DOCKER_USER/devapp-dev:latest
+                    docker tag $IMAGE_NAME $DOCKER_USER/buildapp-dev:latest
+                    docker push $DOCKER_USER/buildapp-dev:latest
                     '''
                 }
             }

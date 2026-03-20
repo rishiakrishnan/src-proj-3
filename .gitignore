@@ -1,11 +1,6 @@
-# Terraform state (very important to ignore)
 terraform.tfstate
-
-# Logs & env
 *.log
 .env
-
-# OS junk
 .DS_Store
 Thumbs.db
 
