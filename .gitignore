@@ -1,0 +1,7 @@
+terraform.tfstate
+*.log
+.env
+.DS_Store
+Thumbs.db
+
+_redirects

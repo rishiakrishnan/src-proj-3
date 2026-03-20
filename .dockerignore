@@ -1,0 +1,11 @@
+.git
+.gitignore
+Dockerfile
+docker-compose.yml
+Jenkinsfile
+terraform.tfstate
+
+build.sh
+deploy.sh
+
+_redirects
